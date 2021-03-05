@@ -1,0 +1,52 @@
+create DATABASE gomycode;
+USE gomycode;
+
+CREATE TABLE customer 
+( 
+customer_id VARCHAR(20), 
+customer_name VARCHAR(20) NOT NULL, 
+customer_tel NUMBER, 
+PRIMARY KEY (customer_id) 
+);
+
+CREATE TABLE product
+( 
+product_id VARCHAR(20), 
+product_name VARCHAR(20) NOT NULL, 
+price NUMBER UNSIGNED, 
+PRIMARY KEY (product_id) 
+);
+
+CREATE TABLE orders
+( 
+quanity NUMBER,
+total_amount NUMBER,
+product_id VARCHAR(20), 
+customer_id VARCHAR(20), 
+CONSTRAINT FK_customerOrder FOREIGN KEY (customer_id)
+    REFERENCES customer(customer_id),
+CONSTRAINT FK_productOrder FOREIGN KEY (product_id)
+    REFERENCES product(product_id),
+);
+
+ALTER TABLE product
+ADD Category VARCHAR(20);
+
+ALTER TABLE orders 
+ADD OrderDate DATE DEFAULT GETDATE();
+
+
+****** DML ********
+
+INSERT INTO product VALUES 
+('P01', 'Samsung Galaxy S20', 'Smartphone', 3299),
+('P02', 'Asus Notebook', 'PC', 4599);
+
+INSERT INTO customer VALUES 
+('C01', 'Ali', 71321000),
+('C02', 'Asma', 77345823);
+
+INSERT INTO orders VALUES 
+('C01', 'P02', , 2, 9198),
+('C02', 'P01', 28/05/2020, 1, 3299);
+
